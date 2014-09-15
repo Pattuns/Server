@@ -12,6 +12,8 @@ $stationNames = array($_POST["station_1"], $_POST["station_2"]);
 
 $points = new Points($stationNames);
 
-$points->compairByFare();
+//$points->compairByFare();
+
+$points->compairByDistance();
 
 ?>

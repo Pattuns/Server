@@ -38,13 +38,22 @@ class Points
         $resultArray = array();
 
         $arrayTemp_0 = $this->stations[0]->getGeoInfo();
-        $arrayTemp_1 = $this->stations[0]->getGeoInfo();
+        $arrayTemp_1 = $this->stations[1]->getGeoInfo();
 
-        $urlParametor = "ll1=" . $arrayTemp_0['lat'] . "," . $arrayTemp_0['lon'] . 
-            "&ll2=" . $arrayTemp_1['lat'] . "," . $arrayTemp_1['lon'];
+        $interPoint = array('lat' => ($arrayTemp_1['lat'] + $arrayTemp_0['lat']) / 2,
+            'lon' => ($arrayTemp_1['lon'] + $arrayTemp_0['lon']) / 2);
 
         # 距離取得用APIのURL
-        $urlDistance = "http://lab.uribou.net/ll2dist/";
+        // $urlDistance = "http://lab.uribou.net/ll2dist/" . $urlDistance;
+
+        var_dump($interPoint);
+        $urlSearch = "https://api.tokyometroapp.jp/api/v2/places?rdf:type=odpt:Station&lon=" . 
+            $interPoint['lat'] . "&lat=" . $interPoint['lon'] . "&radius=500&acl:consumerKey=" . CONSKEY;
+
+        echo $urlSearch;
+
+        $interInfo = json_decode(file_get_contents($urlSearch));
+        var_dump($interInfo);
 
     }
 
