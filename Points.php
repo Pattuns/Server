@@ -53,7 +53,15 @@ class Points
         echo $urlSearch;
 
         $interInfo = json_decode(file_get_contents($urlSearch));
-        var_dump($interInfo);
+
+    }
+
+    function getPointsGeo(){
+        $result = array();
+        foreach($this->stations as $station)
+            $result[] = $station->getGeoInfo();
+
+        return $result;
 
     }
 

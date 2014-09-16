@@ -35,8 +35,8 @@ class Station
 
         $geo = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
 
-        $this->geoInfo['lat'] = $geo["coordinates"][0];
-        $this->geoInfo['lon'] = $geo["coordinates"][1];
+        $this->geoInfo['lon'] = $geo["coordinates"][0];
+        $this->geoInfo['lat'] = $geo["coordinates"][1];
 
         $url = "https://api.tokyometroapp.jp/api/v2/datapoints?";
 
