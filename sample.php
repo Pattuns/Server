@@ -16,14 +16,17 @@ $pointsGeo = array();
 
 $pointsGeo = $points->getPointsGeo();
 
-$interPoint = array(($pointsGeo[0]["lon"] + $pointsGeo[1]["lon"]) / 2 ,
-    ($pointsGeo[0]["lat"] + $pointsGeo[1]["lat"]) / 2 );
-
-var_dump($interPoint);
+$interPoint = array("lon" => ($pointsGeo[0]["lon"] + $pointsGeo[1]["lon"]) / 2 ,
+    "lat" => ($pointsGeo[0]["lat"] + $pointsGeo[1]["lat"]) / 2 );
+//
+// var_dump($interPoint);
 
 // $points->compairByFare();
 //
 // $points->compairByDistance();
+
+$lat = 35.701567091526;
+$lon = 139.71764763538;
 
 ?>
 
@@ -38,11 +41,21 @@ var_dump($interPoint);
 var map;
 function initialize() {
     var mapOptions = {
-    zoom: 8,
-        center: new google.maps.LatLng(34.397, 150.644)
+    zoom: 10,
+        center: new google.maps.LatLng(<?php echo $interPoint["lat"];?> , <?php echo $interPoint["lon"];?>)
 };
 
 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+<?php foreach($pointsGeo as $num => $pointGeo){ ?>
+var markeri_<?php echo $num; ?> = new google.maps.Marker({
+      position: new google.maps.LatLng(<?php echo $pointGeo["lat"]; ?>,<?php echo $pointGeo["lon"]; ?>),
+      animation: google.maps.Animation.DROP,
+      map: map,
+  });
+<?php } ?>
+
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
