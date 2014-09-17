@@ -8,6 +8,7 @@ require_once '/var/www/html/metoro/Station.php';
 class Station
 {
 
+    public $stationId;
     # 駅情報
     public $stationInfo = array();
 
@@ -19,9 +20,11 @@ class Station
     public $fareInfo = array();
 
     # 地理情報
-    public $geoinfo = array();
+    public $gisInfo = array();
 
     function __construct($stationId){
+
+        $this->stationId = $stationId;
 
         $url = "https://api.tokyometroapp.jp/api/v2/datapoints/";
 
@@ -33,10 +36,10 @@ class Station
 
         $this->stationName = $this->stationInfo ["dc:title"];
 
-        $geo = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
+        $gis = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
 
-        $this->geoInfo['lon'] = $geo["coordinates"][0];
-        $this->geoInfo['lat'] = $geo["coordinates"][1];
+        $this->gisInfo['lon'] = $gis["coordinates"][0];
+        $this->gisInfo['lat'] = $gis["coordinates"][1];
 
         $url = "https://api.tokyometroapp.jp/api/v2/datapoints?";
 
@@ -73,9 +76,14 @@ class Station
         return $this->fareInfo;
     }
 
-    function getGeoInfo(){
+    function getGisInfo(){
 
-        return $this->geoInfo;
+        return $this->gisInfo;
+    }
+
+    function getStationId(){
+
+        return $this->stationId;
     }
 }
 

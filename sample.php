@@ -2,6 +2,7 @@
 
 require_once '/var/www/html/metoro/Station.php';
 require_once '/var/www/html/metoro/Points.php';
+require_once '/var/www/html/metoro/StationTemp.php';
 
 # コンシューマーキー
 define('CONSKEY','2b6341efbf502781c1be49bf3228cb02918742950472cc8302dc9fca452fe3aa');
@@ -12,21 +13,18 @@ $stationNames = array($_POST["station_1"], $_POST["station_2"]);
 
 $points = new Points($stationNames);
 
-$pointsGeo = array();
+$pointsGis = array();
 
-$pointsGeo = $points->getPointsGeo();
+$pointsGis = $points->getPointsGis();
 
-$interPoint = array("lon" => ($pointsGeo[0]["lon"] + $pointsGeo[1]["lon"]) / 2 ,
-    "lat" => ($pointsGeo[0]["lat"] + $pointsGeo[1]["lat"]) / 2 );
-//
-// var_dump($interPoint);
+$interPoint = array("lon" => ($pointsGis[0]["lon"] + $pointsGis[1]["lon"]) / 2 ,
+    "lat" => ($pointsGis[0]["lat"] + $pointsGis[1]["lat"]) / 2 );
 
-// $points->compairByFare();
-//
+$pointList = array();
+
+$pointsList = $points->compairByFare();
+
 // $points->compairByDistance();
-
-$lat = 35.701567091526;
-$lon = 139.71764763538;
 
 ?>
 
@@ -41,20 +39,28 @@ $lon = 139.71764763538;
 var map;
 function initialize() {
     var mapOptions = {
-    zoom: 10,
+    zoom: 12,
         center: new google.maps.LatLng(<?php echo $interPoint["lat"];?> , <?php echo $interPoint["lon"];?>)
 };
 
 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-<?php foreach($pointsGeo as $num => $pointGeo){ ?>
-var markeri_<?php echo $num; ?> = new google.maps.Marker({
-      position: new google.maps.LatLng(<?php echo $pointGeo["lat"]; ?>,<?php echo $pointGeo["lon"]; ?>),
+var icon = 'http://maps.google.co.jp/mapfiles/ms/icons/green-dot.png';
+<?php foreach($pointsGis as $num => $pointGis){ ?>
+var marker_<?php echo $num; ?> = new google.maps.Marker({
+      position: new google.maps.LatLng(<?php echo $pointGis["lat"]; ?>,<?php echo $pointGis["lon"]; ?>),
       animation: google.maps.Animation.DROP,
       map: map,
   });
 <?php } ?>
 
+<?php foreach($pointsList as $num => $pointGis){ ?>
+var marker_<?php echo $num; ?> = new google.maps.Marker({
+      position: new google.maps.LatLng(<?php echo $pointGis["lat"]; ?>,<?php echo $pointGis["lon"]; ?>),
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: icon,
+  });
+<?php } ?>
 
 }
 

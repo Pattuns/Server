@@ -37,8 +37,8 @@ class Points
 
         $resultArray = array();
 
-        $arrayTemp_0 = $this->stations[0]->getGeoInfo();
-        $arrayTemp_1 = $this->stations[1]->getGeoInfo();
+        $arrayTemp_0 = $this->stations[0]->getGisInfo();
+        $arrayTemp_1 = $this->stations[1]->getGisInfo();
 
         $interPoint = array('lat' => ($arrayTemp_1['lat'] + $arrayTemp_0['lat']) / 2,
             'lon' => ($arrayTemp_1['lon'] + $arrayTemp_0['lon']) / 2);
@@ -56,10 +56,10 @@ class Points
 
     }
 
-    function getPointsGeo(){
+    function getPointsGis(){
         $result = array();
         foreach($this->stations as $station)
-            $result[] = $station->getGeoInfo();
+            $result[] = $station->getGisInfo();
 
         return $result;
 
@@ -78,19 +78,35 @@ class Points
         $arrayTemp_1 = $this->stations[1]->getFareInfo();
         $arrayTempName_1 = $this->stations[1]->getStationName();
 
+        $pointList = array();
+
         foreach($arrayTemp_0 as $station => $fare){
             if(array_key_exists($station, $arrayTemp_1)){
                 if($fare == $arrayTemp_1[$station])
                     $resultArray[$station] = $fare;
             }
         }
+        
+        $minFare = min($resultArray);
+
+        $result = array_filter($resultArray,function($array) use ($minFare){
+            return $array == $minFare;
+        });
 
         if(asort($resultArray)){
             echo "<table border='1'>";
             echo "<tr><th>Point 1</th><th>待ち合わせ</th><th>Point 2</th><th>Fare</th><tr>";
-            foreach($resultArray as $station => $Fare)
+            foreach($result as $station => $Fare){
+
+
+                $Point = new StationTemp($station);
+                $pointList[] = $Point->getGis();
+
                 echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $station . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
+            }
         }
+
+        return $pointList;
 
 
     }
