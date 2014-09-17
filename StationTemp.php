@@ -8,6 +8,8 @@ class StationTemp
 
     public $stationAlias;
 
+    public $stationName;
+
     public $gisInfo = array();
 
     function __construct($stationAlias){
@@ -19,6 +21,8 @@ class StationTemp
         $stationUrl = $url . "rdf:type=odpt:Station&owl:sameAs=" . $stationAlias . "&acl:consumerKey=" . CONSKEY;
 
         $this->stationInfo = get_object_vars(array_shift(json_decode(file_get_contents($stationUrl))));
+
+        $this->stationName = $this->stationInfo ["dc:title"];
 
         $gis = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
 
@@ -34,6 +38,11 @@ class StationTemp
 
     function getGis(){
         return $this->gisInfo;
+
+    }
+
+    function getStationName(){
+        return $this->stationName;
 
     }
 

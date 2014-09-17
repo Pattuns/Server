@@ -102,7 +102,7 @@ class Points
                 $Point = new StationTemp($station);
                 $pointList[] = $Point->getGis();
 
-                echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $station . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
+                echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $Point->getStationName() . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
             }
         }
 
