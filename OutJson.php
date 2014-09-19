@@ -40,14 +40,14 @@ foreach($points->stations as $station){
 
 foreach($pointsList as $midpoint){
     echo "{";
-    echo "type:point,";
+    echo "type:midpoint,";
     echo "name:" . $midpoint->getStationName() . ",";
     echo "gis:{";
     foreach($midpoint->getGisInfo() as $type => $value){
             echo $type . ":" . $value . ",";
         }
     echo "},";
-    echo "fare:". $midpoint['fare'] . ",";
+    echo "fare:". $midpoint->getFare() . ",";
     echo"},";
 }
 echo "]";

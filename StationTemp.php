@@ -52,6 +52,10 @@ class StationTemp
         $this->fare = $fare;
     }
 
+    function getFare(){
+        return $this->fare;
+    }
+
 }
 
 ?>
