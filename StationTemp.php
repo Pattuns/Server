@@ -12,6 +12,8 @@ class StationTemp
 
     public $gisInfo = array();
 
+    public $fare;
+
     function __construct($stationAlias){
 
         $this->stationAlias = $stationAlias;
@@ -44,6 +46,10 @@ class StationTemp
     function getStationName(){
         return $this->stationName;
 
+    }
+
+    function setFare($fare){
+        $this->fare = $fare;
     }
 
 }
