@@ -16,7 +16,7 @@ $informations = json_decode($result);
 <body>
 
 <h2>Station 1</h2>
-<form method="get" action="sample.php">
+<form method="get" action="OutJson.php">
 
 <p>
 <select name="station_1">
