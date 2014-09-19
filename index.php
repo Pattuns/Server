@@ -1,5 +1,8 @@
 <?php
-$result = file_get_contents("https://api.tokyometroapp.jp/api/v2/datapoints?rdf:type=odpt:Station&acl:consumerKey=2b6341efbf502781c1be49bf3228cb02918742950472cc8302dc9fca452fe3aa");
+
+require_once '/var/www/html/metoro/sample.php';
+
+$result = file_get_contents("https://api.tokyometroapp.jp/api/v2/datapoints?rdf:type=odpt:Station&acl:consumerKey=". CONSKEY);
 $informations = json_decode($result);
 ?>
 
@@ -12,7 +15,7 @@ $informations = json_decode($result);
 <body>
 
 <h2>Station 1</h2>
-<form method="post" action="sample.php">
+<form method="get" action="sample.php">
 
 <p>
 <select name="station_1">

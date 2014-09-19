@@ -9,7 +9,7 @@ define('CONSKEY','c1d257fbcb8c4ccc7065d5f4bc38442d20db87a6efc9995edbd535cfa642fd
 
 
 # ポストされて送られてきた駅名
-$stationNames = array($_POST["station_1"], $_POST["station_2"]);
+$stationNames = array($_GET["station_1"], $_GET["station_2"]);
 
 $points = new Points($stationNames);
 
