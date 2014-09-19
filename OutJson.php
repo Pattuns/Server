@@ -24,7 +24,7 @@ $pointList = array();
 
 $pointsList = $points->compairByFare();
 
-echo "{";
+echo "[";
 foreach($points->stations as $station){
     echo "{";
     echo "type:point,";
@@ -33,12 +33,23 @@ foreach($points->stations as $station){
         foreach($station->getGisInfo() as $type => $value){
             echo $type . ":" . $value . ",";
         }
-    echo "}";
+    echo "},";
+    echo "fare:0,";
     echo"},";
 }
-echo "}";
 
-
-
+foreach($pointList as $midpoint){
+    echo "{";
+    echo "type:point,";
+    echo "name:" . $midpoint->getStationName() . ",";
+    echo "gis:{";
+    foreach($midpoint->getGisInfo() as $type => $value){
+            echo $type . ":" . $value . ",";
+        }
+    echo "},";
+    echo "fare:". $midpoint['fare'] . ",";
+    echo"},";
+}
+echo "]";
 
 ?>
