@@ -13,8 +13,10 @@ foreach($informations as $info){
     $Info = get_object_vars($info);
     var_dump($Info);
     foreach($Info as $key => $value){
+        if(!is_array($value)){
 
         echo "<tr><td>" . $key . "</td><td>" . $value . "</td></tr>";
+        }
 
     }
 
