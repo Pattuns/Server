@@ -94,8 +94,8 @@ class Points
         });
 
         if(asort($resultArray)){
-            echo "<table border='1'>";
-            echo "<tr><th>Point 1</th><th>待ち合わせ</th><th>Point 2</th><th>Fare</th><tr>";
+            // echo "<table border='1'>";
+            // echo "<tr><th>Point 1</th><th>待ち合わせ</th><th>Point 2</th><th>Fare</th><tr>";
             foreach($result as $station => $Fare){
 
 
@@ -103,7 +103,7 @@ class Points
                 $Point->setFare($fare);
                 $pointList[] = $Point;
 
-                echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $Point->getStationName() . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
+                // echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $Point->getStationName() . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
             }
         }
 
