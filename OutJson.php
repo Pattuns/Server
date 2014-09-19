@@ -38,7 +38,7 @@ foreach($points->stations as $station){
     echo"},";
 }
 
-foreach($pointList as $midpoint){
+foreach($pointsList as $midpoint){
     echo "{";
     echo "type:point,";
     echo "name:" . $midpoint->getStationName() . ",";
