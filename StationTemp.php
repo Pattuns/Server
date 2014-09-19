@@ -38,7 +38,7 @@ class StationTemp
         echo "lon:" . $gisInfo['lon'] . " lat:" .$gisInfo['lat'] . "<br />";
     }
 
-    function getGis(){
+    function getGisInfo(){
         return $this->gisInfo;
 
     }
