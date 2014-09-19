@@ -100,7 +100,7 @@ class Points
 
 
                 $Point = new StationTemp($station);
-                $Point['fare'] = $fare;
+                $Point->setFare($fare);
                 $pointList[] = $Point;
 
                 echo "<tr><td>" . $arrayTempName_0 . "</td><td>" . $Point->getStationName() . "</td><td>" . $arrayTempName_1 . "</td><td>" . $Fare . "</td><tr>";
