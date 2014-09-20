@@ -18,21 +18,26 @@ foreach($informations as $num => $info){
             echo "<tr><td>" . $key . "</td><td>" . $value ."</td></tr>";
 
 
-            // if($key == "@id")
-            //     echo $value . " | ";
-            //
-            // else if($key == "owl:sameAs")
-            //     echo $value . " | ";
-            //
-            // else if($key == "dc:title")
-            //     echo $value . " | ";
-            //
-            // else if($key == "ug:region"){
-            //     $gisInfo = get_object_vars(json_decode(file_get_contents($value
-            //         . "?acl:consumerKey=" . CONSKEY)));
-            //
-            //     echo $gisInfo["coordinates"][0] . " | ";
-            //     echo $gisInfo["coordinates"][1] . "<br />";
+            if($key == "@id")
+                echo $value . " | ";
+
+            else if($key == "odpt:fromStation")
+                echo $value . " | ";
+
+            else if($key == "odpt:toStation")
+                echo $value . " | ";
+
+            else if($key == "odpt:ticketFare")
+                echo $value . " | ";
+
+            else if($key == "odpt:childTicketFare")
+                echo $value . " | ";
+
+            else if($key == "odpt:icCardFare")
+                echo $value . " | ";
+
+            else if($key == "odpt:childIcCardFare")
+                echo $value . "<br />";
 
         }
 
