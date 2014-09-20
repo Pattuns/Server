@@ -35,8 +35,7 @@ class Station
         $this->stationAlias = $this->stationInfo["owl:sameAs"];
 
         $this->stationName = $this->stationInfo ["dc:title"];
-
-        $gis = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
+$gis = get_object_vars(json_decode(file_get_contents($this->stationInfo["ug:region"] . "?acl:consumerKey=" . CONSKEY)));
 
         $this->gisInfo['lon'] = $gis["coordinates"][0];
         $this->gisInfo['lat'] = $gis["coordinates"][1];
