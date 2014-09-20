@@ -10,12 +10,9 @@ $informations = json_decode($result);
 //     @id | owl:sameAs | dc:title | ug:region | lon | lat
 foreach($informations as $num => $info){
 
-    echo "<table>";
     $Info = get_object_vars($info);
     foreach($Info as $key => $value){
         if(!is_array($value)){
-
-            echo "<tr><td>" . $key . "</td><td>" . $value ."</td></tr>";
 
 
             if($key == "@id")
